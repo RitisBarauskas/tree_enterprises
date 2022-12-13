@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from enterprise.models import Enterprise, Employee, CardEmployee
+
+admin.site.register(Employee)
+admin.site.register(Enterprise)
+admin.site.register(CardEmployee)
