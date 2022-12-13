@@ -32,5 +32,3 @@ class Command(BaseCommand):
             ) for _ in range(5000)
         ]
         Employee.objects.bulk_create(employees)
-
-
