@@ -15,6 +15,7 @@ class Command(BaseCommand):
 
     Для запуска необходимо выполнить команду:
         python manage.py generate_employees
+        python manage.py generate_employees -del
     """
     help = 'Генератор сотрудников'
 

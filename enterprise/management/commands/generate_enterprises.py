@@ -13,6 +13,7 @@ class Command(BaseCommand):
 
     Для запуска необходимо выполнить команду:
         python manage.py generate_enterprises
+        python manage.py generate_enterprises -del
     """
     help = 'Генератор организаций'
 
