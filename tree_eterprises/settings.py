@@ -37,6 +37,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tree_eterprises.urls'
 
+STATICFILES_DIRS = ((BASE_DIR / 'static'),)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -87,6 +89,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -16,6 +16,7 @@ class Command(BaseCommand):
             name='Head inc',
             description='Самая главная организация',
             parent=None,
+            slug='head',
         )
         for i in range(5):
             for level in range(5):
@@ -24,4 +25,5 @@ class Command(BaseCommand):
                     name=f'Организация {i+level}',
                     description='Дочерняя организация',
                     parent=(last_ent if level else parent_ent),
+                    slug=f'slug{level}{i}',
                 )

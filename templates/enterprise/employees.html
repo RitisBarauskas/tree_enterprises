@@ -2,18 +2,16 @@
 {% block title %}Список сотрудников организации {{ title }}{% endblock %}
 
 {% block content %}
-<main>
-    <section>
-	<div class="container">
-	    <h1>Список сотрудников организации {{ title }}</h1>
-	</div>
-    </section>
-	<div>
-		{% for employee in object_list%}
-            <div>
-                    <h3>{{ employee }}</h3>
-            </div>
-		{% endfor %}
+    <div class="row">
+        <h1>Список сотрудников организации {{ title }}</h1>
     </div>
-</main>
+	<div class="row">
+        <ol>
+            {% for employee in object_list %}
+                <li>
+                    {{ employee }}
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
 {% endblock %}

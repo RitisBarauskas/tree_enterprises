@@ -28,6 +28,7 @@ class Enterprise(MPTTModel):
         verbose_name='Дата создания записи',
         auto_now_add=True,
     )
+    slug = models.SlugField()
 
     class MPTTMeta:
         order_insertion_by = ('name',)
