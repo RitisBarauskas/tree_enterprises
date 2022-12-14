@@ -1,8 +1,13 @@
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-qw@qf(+zfra^j8@v)n7)zhmv4l^_3vn_u57h%!h^*pkm&g)xer'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -15,6 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mptt',
+    'django_mptt_admin',
+    'enterprise',
 ]
 
 MIDDLEWARE = [
@@ -28,6 +36,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'tree_eterprises.urls'
+
+STATICFILES_DIRS = ((BASE_DIR / 'static'),)
 
 TEMPLATES = [
     {
@@ -69,7 +79,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
@@ -79,6 +89,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

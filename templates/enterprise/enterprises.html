@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load mptt_tags %}
+
+{% block title %}Список организаций{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h1>Список  организаций</h1>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="span12">
+    	    <div class="menu">
+                <div class="accordion">
+                    <div class="accordion-group">
+                        <ul>
+                            {% recursetree object_list %}
+                                <div class="accordion-heading {{ node.slug }}">
+                                    <li>
+                                        <a data-toggle="collapse" href="#{{ node.slug }}">
+                                            {{ node.name }}
+                                        </a>
+                                        (сотрудников: <a href="{{ node.get_absolute_url }}">{{ node.employees }}</a>)
+                                        <div class="accordion-body collapse" id="{{ node.slug }}">
+                                            {% if not node.is_leaf_node %}
+                                                <ul>
+                                                    {{ children }}
+                                                </ul>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                </div>
+                            {% endrecursetree %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

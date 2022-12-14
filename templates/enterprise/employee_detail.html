@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Список сотрудников организации {{ title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h1>Личная карточка "{{ card_employee.employee.full_name }}"</h1>
+        <a href="{% url 'enterprises:enterprises-list' %}" class="btn">Спискок организаций</a>
+        <a href="{% url 'enterprises:employees-by-enterprises' card_employee.enterprise.id %}" class="btn">Сотрудники организации</a>
+    </div>
+    <hr>
+	<div class="row">
+        <div class="span2">
+            Фамилия:
+        </div>
+        <div class="span10">
+            {{ card_employee.employee.family_name }}
+        </div>
+        <div class="span2">
+            Имя:
+        </div>
+        <div class="span10">
+            {{ card_employee.employee.name }}
+        </div>
+            <div class="span2">
+            Отчество:
+        </div>
+        <div class="span10">
+            {{ card_employee.employee.father_name }}
+        </div>
+        <div class="span2">
+            Табельный номер:
+        </div>
+        <div class="span10">
+            {{ card_employee.employee.id }}
+        </div>
+        <div class="span2">
+            Должность:
+        </div>
+        <div class="span10">
+            {{ card_employee.role_view }}
+        </div>
+        <div class="span2">
+            Принят на работу:
+        </div>
+        <div class="span10">
+            {{ card_employee.date_start|date:"d E Y" }}
+        </div>
+            <div class="span2">
+            Заработная плата:
+        </div>
+        <div class="span10">
+            {{ card_employee.salary }}
+        </div>
+        <div class="span2">
+            Организация:
+        </div>
+        <div class="span10">
+            {{ card_employee.enterprise.name }}
+        </div>
+    </div>
+{% endblock %}
