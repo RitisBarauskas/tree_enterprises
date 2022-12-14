@@ -12,14 +12,16 @@ class Command(BaseCommand):
     help = 'Генератор организаций'
 
     def handle(self, *args, **options) -> None:
-        parents = []
-        for level in range(5):
-            enterprises = [
-                Enterprise(
-                    name=f'Организация {i}, уровень {level}',
-                    description=f'Мощное описание {i**2}',
-                    parent_id=(parents[i].id if parents else None)
-                ) for i in range(5)
-            ]
-            Enterprise.objects.bulk_create(enterprises)
-            parents = Enterprise.objects.all().order_by('-id')[:5]
+        parent_ent = Enterprise.objects.create(
+            name='Head inc',
+            description='Самая главная организация',
+            parent=None,
+        )
+        for i in range(5):
+            for level in range(5):
+                last_ent = Enterprise.objects.last()
+                Enterprise.objects.create(
+                    name=f'Организация {i+level}',
+                    description='Дочерняя организация',
+                    parent=(last_ent if level else parent_ent),
+                )

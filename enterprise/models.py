@@ -1,9 +1,10 @@
 from django.db import models
+from mptt.models import MPTTModel, TreeForeignKey
 
 from enterprise.enums import RolesEmployeeEnum
 
 
-class Enterprise(models.Model):
+class Enterprise(MPTTModel):
     """
     Предприятие
     """
@@ -14,23 +15,26 @@ class Enterprise(models.Model):
     description = models.TextField(
         verbose_name='Описание организации',
     )
-    parent = models.ForeignKey(
-        'Enterprise',
-        verbose_name='ID родительского предприятия',
+    parent = TreeForeignKey(
+        'self',
+        on_delete=models.PROTECT,
         null=True,
         blank=True,
-        on_delete=models.SET_NULL,
-        related_name='enterprises',
+        related_name='children',
+        verbose_name='Родительская организация',
     )
     created_at = models.DateTimeField(
         verbose_name='Дата создания записи',
         auto_now_add=True,
     )
 
+    class MPTTMeta:
+        order_insertion_by = ('name',)
+
     class Meta:
+        unique_together = [['parent', 'name']]
         verbose_name = 'Предприятие'
         verbose_name_plural = 'Предприятия'
-        ordering = ('-created_at',)
 
     def __str__(self):
         return self.name
