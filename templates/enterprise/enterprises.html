@@ -17,9 +17,13 @@
                             {% recursetree object_list %}
                                 <div class="accordion-heading {{ node.slug }}">
                                     <li>
-                                        <a data-toggle="collapse" href="#{{ node.slug }}">
+                                        {% if node.is_leaf_node %}
                                             {{ node.name }}
-                                        </a>
+                                        {% else %}
+                                            <a data-toggle="collapse" href="#{{ node.slug }}">
+                                                {{ node.name }}
+                                            </a>
+                                        {% endif %}
                                         (сотрудников: <a href="{{ node.get_absolute_url }}">{{ node.employees }}</a>)
                                         <div class="accordion-body collapse" id="{{ node.slug }}">
                                             {% if not node.is_leaf_node %}
