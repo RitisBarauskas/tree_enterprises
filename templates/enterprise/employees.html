@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Список сотрудников организации {{ title }}{% endblock %}
+
+{% block content %}
+<main>
+    <section>
+	<div class="container">
+	    <h1>Список сотрудников организации {{ title }}</h1>
+	</div>
+    </section>
+	<div>
+		{% for employee in object_list%}
+            <div>
+                    <h3>{{ employee }}</h3>
+            </div>
+		{% endfor %}
+    </div>
+</main>
+{% endblock %}

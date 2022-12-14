@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
 from enterprise.enums import RolesEmployeeEnum
@@ -38,6 +39,9 @@ class Enterprise(MPTTModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('enterprises:employees-by-enterprises', args=[self.id])
 
 
 class Employee(models.Model):
