@@ -3,13 +3,16 @@
 
 {% block content %}
     <div class="row">
-        <h1>Список сотрудников организации {{ title }}</h1>
+        <h1>Список сотрудников организации "{{ title }}"</h1>
+        <a href="{% url 'enterprises:enterprises-list' %}" class="btn">К списку организаций</a>
     </div>
+    <hr>
 	<div class="row">
         <ol>
             {% for employee in object_list %}
                 <li>
-                    {{ employee }}
+                    {{ employee.full_name_and_role }}
+                    (<a href="{% url 'enterprises:employee-detail' employee.id %}">подробно</a>)
                 </li>
             {% endfor %}
         </ol>

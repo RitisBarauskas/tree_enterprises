@@ -3,7 +3,7 @@ import enum
 
 class RolesEmployeeEnum(enum.Enum):
     """
-    Должности сотрудников
+    Должности сотрудников.
     """
     MANAGER = 'Менеджер'
     DEVELOPER = 'Разработчик'

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import UniqueConstraint
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -7,7 +8,7 @@ from enterprise.enums import RolesEmployeeEnum
 
 class Enterprise(MPTTModel):
     """
-    Предприятие
+    Предприятие.
     """
     name = models.CharField(
         verbose_name='Название организации',
@@ -28,13 +29,21 @@ class Enterprise(MPTTModel):
         verbose_name='Дата создания записи',
         auto_now_add=True,
     )
-    slug = models.SlugField()
+    slug = models.SlugField(
+        verbose_name='Слаг',
+        unique=True,
+    )
 
     class MPTTMeta:
-        order_insertion_by = ('name',)
+        order_insertion_by = ('id',)
 
     class Meta:
-        unique_together = [['parent', 'name']]
+        constraints = [
+            UniqueConstraint(
+                fields=('parent', 'slug'),
+                name='slug_parent_constraint',
+            ),
+        ]
         verbose_name = 'Предприятие'
         verbose_name_plural = 'Предприятия'
 
@@ -47,7 +56,7 @@ class Enterprise(MPTTModel):
 
 class Employee(models.Model):
     """
-    Сотрудник
+    Сотрудник.
     """
     name = models.CharField(
         verbose_name='Имя',
@@ -74,10 +83,14 @@ class Employee(models.Model):
     def __str__(self):
         return f'{self.family_name} {self.name} {self.father_name}'
 
+    @property
+    def full_name(self):
+        return f'{self.family_name} {self.name} {self.father_name}'
+
 
 class CardEmployee(models.Model):
     """
-    Карточка сотрудника
+    Карточка сотрудника.
     """
     employee = models.OneToOneField(
         Employee,
@@ -117,3 +130,14 @@ class CardEmployee(models.Model):
 
     def __str__(self):
         return f'{self.employee} ({RolesEmployeeEnum[self.role].value})'
+
+    @property
+    def full_name_and_role(self):
+        return (
+            f'{self.employee.full_name} '
+            f'({RolesEmployeeEnum[self.role].value})'
+        )
+
+    @property
+    def role_view(self):
+        return f'{RolesEmployeeEnum[self.role].value}'
