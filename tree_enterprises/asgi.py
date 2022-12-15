@@ -1,5 +1,5 @@
 """
-ASGI config for tree_eterprises project.
+ASGI config for tree_enterprises project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tree_eterprises.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tree_enterprises.settings')
 
 application = get_asgi_application()

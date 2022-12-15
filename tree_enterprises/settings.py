@@ -35,7 +35,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'tree_eterprises.urls'
+ROOT_URLCONF = 'tree_enterprises.urls'
 
 STATICFILES_DIRS = ((BASE_DIR / 'static'),)
 
@@ -55,7 +55,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'tree_eterprises.wsgi.application'
+WSGI_APPLICATION = 'tree_enterprises.wsgi.application'
 
 DATABASES = {
     'default': {
