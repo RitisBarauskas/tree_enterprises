@@ -5,9 +5,6 @@ from enterprise.models import CardEmployee, Employee, Enterprise
 
 
 class EnterpriseAdmin(DjangoMpttAdmin):
-    """
-    Админка компаний.
-    """
     prepopulated_fields = {"name": ("description",)}
 
 
