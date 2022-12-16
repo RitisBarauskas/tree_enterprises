@@ -18,7 +18,7 @@ class EnterpriseListView(ListView):
 
 class EmployeeByEnterpriseView(ListView):
     """
-    Список сотрудников компании
+    Список сотрудников компании.
     """
     context_object_name = 'employees'
     template_name = 'enterprise/employees.html'
@@ -26,11 +26,11 @@ class EmployeeByEnterpriseView(ListView):
     def get_queryset(self):
         self.enterprise = get_object_or_404(Enterprise, id=self.kwargs['id'])
 
-        return CardEmployee.objects.filter(enterprise=self.enterprise)
+        return self.enterprise.cards.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = self.enterprise
+        context['title'] = self.enterprise.name
 
         return context
 
